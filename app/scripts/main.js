@@ -3,6 +3,9 @@
 
 require.config({
   shim: {
+		underscore: {
+			exports: '_'
+		},
     bootstrap: {
       deps: ['jquery'],
       exports: 'jquery'
@@ -18,8 +21,10 @@ require.config({
 
 require([
   'backbone',
-	'routes/blog'
-], function (Backbone, BlogRouter) {
-	var router = new BlogRouter();
+	'views/portfolio',
+	'routes/router'
+], function (Backbone, App, Router) {
+	new Router();
   Backbone.history.start({pushState: true});
+	new App();
 });

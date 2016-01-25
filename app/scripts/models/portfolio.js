@@ -6,7 +6,7 @@ define([
 ], function (_, Backbone) {
   'use strict';
 
-  var BlogModel = Backbone.Model.extend({
+  var PortfolioModel = Backbone.Model.extend({
     url: '',
 
     initialize: function() {
@@ -14,6 +14,10 @@ define([
 
     defaults: {
     },
+		
+		triggerTest: function() {
+			console.log('test');
+		},
 
     validate: function(attrs, options) {
     },
@@ -23,5 +27,5 @@ define([
     }
   });
 
-  return BlogModel;
+  return PortfolioModel;
 });

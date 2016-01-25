@@ -3,8 +3,8 @@
 define([
   'jquery',
   'backbone',
-	'views/blog'
-], function ($, Backbone, BlogView) {
+	'views/portfolio'
+], function ($, Backbone, PortfolioView) {
   'use strict';
 
   var BlogRouter = Backbone.Router.extend({
@@ -13,7 +13,6 @@ define([
     },
 		
 		home: function() {
-			var homeView = new BlogView();
 		}
 
   });
