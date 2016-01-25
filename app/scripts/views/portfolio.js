@@ -12,7 +12,7 @@ define([
   var PortfolioView = Backbone.View.extend({
     template: JST['app/scripts/templates/portfolio.ejs'],
 
-    el: 'body',
+    el: '.app-container',
 
     events: {
 			'click #me': 'completed'
