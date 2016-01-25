@@ -1,21 +1,26 @@
 /*global define*/
 
 define([
-  'jquery',
   'backbone',
-	'views/portfolio'
-], function ($, Backbone, PortfolioView) {
+	'app'
+], function (Backbone, App) {
   'use strict';
 
-  var BlogRouter = Backbone.Router.extend({
+  var Router = Backbone.Router.extend({
+		
     routes: {
-			'': 'home'
+			'': 'index'
     },
 		
-		home: function() {
+		initialize: function() {
+			Backbone.history.start({pushState: true});
+		},
+		
+		index: function() {
+			App.home();
 		}
 
   });
 
-  return BlogRouter;
+  return Router;
 });

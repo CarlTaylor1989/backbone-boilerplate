@@ -12,6 +12,7 @@ require.config({
     },
   },
   paths: {
+		text: '../bower_components/requirejs-text/text',
     jquery: '../bower_components/jquery/dist/jquery',
     backbone: '../bower_components/backbone/backbone',
     underscore: '../bower_components/lodash/dist/lodash',
@@ -20,11 +21,7 @@ require.config({
 });
 
 require([
-  'backbone',
-	'views/portfolio',
 	'routes/router'
-], function (Backbone, App, Router) {
-	new Router();
-  Backbone.history.start({pushState: true});
-	new App();
+], function (AppRouter) {
+	new AppRouter();
 });

@@ -4,34 +4,19 @@ define([
   'jquery',
   'underscore',
   'backbone',
-	'models/portfolio',
-  'templates'
-], function ($, _, Backbone, Portfolio, JST) {
+	'views/_base',
+	'text!/../templates/portfolio.html'
+], function ($, _, Backbone, BaseView, html) {
   'use strict';
 
-  var PortfolioView = Backbone.View.extend({
-    template: JST['app/scripts/templates/portfolio.ejs'],
-
-    el: '.app-container',
-
-    events: {
-			'click #me': 'completed'
-		},
-
-    initialize: function () {
-			this.model = new Portfolio();
-			
-			this.listenTo(this.model, 'change', this.render);
-    },
+  var PortfolioView = BaseView.extend({
 		
-		completed: function() {
-			this.model.triggerTest();
-		},
+		template: _.template(html),
 
-    render: function () {
-//			this.$el.append(this.template());
-      this.$el.html(this.template(this.model.toJSON()));
-    }
+    events: {},
+		
+		completed: {}
+
   });
 
   return PortfolioView;
