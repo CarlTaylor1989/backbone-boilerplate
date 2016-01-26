@@ -6,8 +6,9 @@ define([
 	'underscore',
 	'backbone',
 	'text!/../templates/_header.html',
+	'text!/../templates/_footer.html',
 	'text!/../templates/portfolio.html'
-], function($, _, Backbone, htmlHeader, Template) {
+], function($, _, Backbone, htmlHeader, htmlFooter, Template) {
 
 	'use strict';
 
@@ -63,8 +64,9 @@ define([
 			$('.app-header').html(header());
 
 			// Set footer
-//			var footer = _.template(htmlFooter);
-//			$('.js-footer').html(footer());
+			console.log(htmlFooter);
+			var footer = _.template(htmlFooter);
+			$('.app-footer').html(footer());
 		},
 
 		destroy: function() {
