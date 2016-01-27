@@ -49,7 +49,7 @@ module.exports = function (grunt) {
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-          '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
+          '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs,html}',
           'test/spec/**/*.js'
         ]
       },
@@ -60,6 +60,15 @@ module.exports = function (grunt) {
         tasks: ['jst']
       },
       test: {
+				options: {
+        port: 9001,
+        middleware: function (connect) {
+						return [
+							mountFolder(connect, 'test'),
+							mountFolder(connect, yeomanConfig.app)
+						];
+					}
+				},
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
         tasks: ['test:true']
       }
@@ -132,6 +141,8 @@ module.exports = function (grunt) {
       all: {
         options: {
           run: true,
+					reporter: 'Spec',
+					timeout: 10000,
           urls: ['http://localhost:<%= connect.test.options.port %>/index.html']
         }
       }

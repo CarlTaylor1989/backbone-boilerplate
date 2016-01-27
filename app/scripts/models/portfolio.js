@@ -16,7 +16,6 @@ define([
     },
 		
 		triggerTest: function() {
-			console.log('test');
 		},
 
     validate: function(attrs, options) {

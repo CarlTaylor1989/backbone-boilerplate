@@ -13,6 +13,14 @@ define([
 	'use strict';
 
 	var BaseView = Backbone.View.extend({
+		
+		events: {
+			'click .nav a': 'navFocus'
+		},
+		
+		navFocus: function() {
+			console.log('nav clicked');
+		},
 
 		el: '.app-container',
 
@@ -31,29 +39,13 @@ define([
 		},
 
 		render: function() {
-//			this.onBeforeRenderBase();
-//			this.onBeforeRender();
-
 			// Inject page header, footer, mobile menu, etc.
 			this.insertCoreHTML();
 
 			// Set page contents
 			this.$el.html(this.template(this.data));
-
-//			this.onBeforeShowBase();
-//			this.onBeforeShow();
-
-			// Fade in page if hidden
-//			if($('.js-fadein').length > 0) {
-//				var self = this;
-//				$('.js-fadein').fadeIn(400, function() {
-//					self.onAfterRenderBase();
-//					self.onAfterRender();
-//				});
-//			} else {
-//				this.onAfterRenderBase();
-//				this.onAfterRender();
-//			}
+			
+			this.navFocus();
 
 			return this;
 		},
@@ -64,7 +56,6 @@ define([
 			$('.app-header').html(header());
 
 			// Set footer
-			console.log(htmlFooter);
 			var footer = _.template(htmlFooter);
 			$('.app-footer').html(footer());
 		},
@@ -169,62 +160,6 @@ define([
 
 		scrollToTop: function() {
 			window.scrollTo(0, 0);
-		},
-
-		setEventTrackingClicks: function(modal) {
-			/* global ga */
-			var selector = '.js-track';
-			if(modal) {
-				selector = '.js-modal ' + selector;
-			}
-			$(selector).click(function() {
-				var category = $(this).data('track-category');
-				var label = $(this).data('track-label');
-				if(typeof category === 'undefined' || typeof label === 'undefined') {
-					return;
-				}
-
-				ga('send', 'event', category, 'click', label);
-			});
-		},
-		trackCarouselChange: function(modal) {
-			/* global ga */
-			var selector = '.js-carousel-track';
-			if(modal) {
-				if($('.js-carousel-tabs').length > 0) {
-					selector = '.js-modal .js-tab.active ' + selector;
-				} else {
-					selector = '.js-modal ' + selector;
-				}
-			}
-			var owl = $(selector).data('owlCarousel');
-			var slideNumber = owl.currentItem;
-
-			var category = $(selector).data('track-category');
-			var label = $(selector).data('track-label');
-			var slideLabel = $(selector).find('.js-carousel-item').eq(slideNumber).data('track-label');
-			if(typeof slideLabel !== 'undefined') {
-				label = label.replace('#', slideLabel);
-			} else {
-				label = label.replace('#', parseInt(slideNumber)+1);
-			}
-
-			ga('send', 'event', category, 'click', label);
-		},
-
-		trackPageView: function() {
-			/* global ga */
-			var location = window.location.protocol + '//' + window.location.hostname + window.location.pathname;
-			var page = '/';
-			if(this.id !== 'home') {
-				location = location + this.id;
-				page = page + this.id;
-			}
-			ga('send', 'pageview', {
-				'location':  location,
-				'page':      page,
-				'title':     this.name
-			});
 		}
 
 	});

@@ -1,20 +1,16 @@
-define(['Example'], function(Example) {
-    'use strict';
+define(function() {
+	'use strict';
+	
+	app.models.User = Backbone.Model.extend({
 
-    var example;
-    beforeEach(function() {
-        example = new Example();
-    });
+		getFullName: function() {
+			return this.get('first_name')+" "+this.get('last_name');
+		}
 
-    describe('Example', function() {
-        it('should have a method named "add"', function() {
-            expect(example.add).to.be.a('function');
-        });
+	});
 
-        describe('.add()', function() {
-            it('should return the sum of two numbers', function() {
-                expect(example.add(1,1)).to.be(2);
-            });
-        });
-    });
+	it('should have a getFullName() method', function() {
+		expect(typeof this.user.getFullName).to.equal('function');
+	});
+	
 });

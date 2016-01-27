@@ -13,9 +13,13 @@ define([
 		
 		template: _.template(html),
 
-    events: {},
+    events: {
+			'click h5': 'headClick'
+		},
 		
-		completed: {}
+		headClick: function() {
+			console.log('clicked');
+		}
 
   });
 
