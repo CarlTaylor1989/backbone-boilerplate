@@ -18,7 +18,7 @@ define([
 		},
 		
 		headClick: function() {
-			console.log('clicked');
+			console.log(this.$el);
 		}
 
   });
