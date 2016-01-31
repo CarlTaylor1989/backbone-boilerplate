@@ -371,7 +371,6 @@ module.exports = function (grunt) {
     'jst',
     'sass:dist',
     'useminPrepare',
-    'imagemin',
     'htmlmin',
     'concat',
     'cssmin',

@@ -14,17 +14,28 @@ define([
 
 	var BaseView = Backbone.View.extend({
 		
+		el: '.app-container',
+		
 		events: {
-			'click .nav a': 'navScroll'
+			'click .nav a, .btn-scroll': 'pageScroll',
+			'scroll': 'detectScroll'
 		},
 		
-		navScroll: function(id) {
+		initialize: function() {
+			_.bindAll(this, 'detectScroll');
+			$(window).scroll(this.detectScroll);
+		},
+		
+		detectScroll: function() {
+			var anchor_offset = $('#skills').offset().top;
+			console.log(anchor_offset);
+		},
+		
+		pageScroll: function(id) {
 			$('html, body').animate({
 				scrollTop: $('#'+id).offset().top - 40
-			}, 1000, 'swing');
+			}, 500, 'swing');
 		},
-
-		el: '.app-container',
 
 		onBeforeShowBase: function() {
 			// Restore footer
@@ -62,11 +73,6 @@ define([
 			$('.app-footer').html(footer());
 		},
 
-		// Return jQuery element for clicked box, whether box itself or child element clicked
-		identifyClickedBox: function(e) {
-			return (e.target.tagName !== 'DIV') ? $(e.target).parent() : $(e.target);
-		},
-
 		setMenuActiveItem: function(id) {
 			$('.nav li').removeClass('active');
 			$('.nav li.menu-' + id).addClass('active');
@@ -74,11 +80,11 @@ define([
 
 		afterRenderBase: function() {
 			var self = this;
-			$('.nav a').on('click', function(e) {
+			$('.nav a, .btn-scroll').on('click', function(e) {
 				e.preventDefault();
 				var id = $(this).data('scroll');
 				self.setMenuActiveItem(id);
-				self.navScroll(id);
+				self.pageScroll(id);
 			});
 		}
 
